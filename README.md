@@ -970,3 +970,441 @@ def solution(my_string):
 ​    
 
 print(solution("aAb1B2cC34oOp"))    
+
+
+문제 : 대문자와 소문자
+
+###### 문제 설명
+
+문자열 `my_string`이 매개변수로 주어질 때, 대문자는 소문자로 소문자는 대문자로 변환한 문자열을 return하도록 solution 함수를 완성해주세요.
+
+---
+
+##### 제한사항
+
+- 1 ≤ `my_string`의 길이 ≤ 1,000
+- `my_string`은 영어 대문자와 소문자로만 구성되어 있습니다.
+
+---
+
+##### 입출력 예
+
+| my_string | result |
+| --- | --- |
+| "cccCCC" | "CCCccc" |
+| "abCdEfghIJ" | "ABcDeFGHij" |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- 소문자는 대문자로 대문자는 소문자로 바꾼 "CCCccc"를 return합니다.
+
+입출력 예 #2
+
+- 소문자는 대문자로 대문자는 소문자로 바꾼 "ABcDeFGHij"를 return합니다.
+
+def solution(my_string):
+
+    answer = ''
+
+    for i in my_string:
+
+        if i.isupper():
+
+            answer+=i.lower()
+
+        else:
+
+            answer+=i.upper()
+
+    return answer
+
+print(solution("cccCCC"))
+
+문제 : 암호 해독
+
+###### 문제 설명
+
+군 전략가 머쓱이는 전쟁 중 적군이 다음과 같은 암호 체계를 사용한다는 것을 알아냈습니다.
+
+- 암호화된 문자열 `cipher`를 주고받습니다.
+- 그 문자열에서 `code`의 배수 번째 글자만 진짜 암호입니다.
+
+문자열 `cipher`와 정수 `code`가 매개변수로 주어질 때 해독된 암호 문자열을 return하도록 solution 함수를 완성해주세요.
+
+---
+
+##### 제한사항
+
+- 1 ≤ `cipher`의 길이 ≤ 1,000
+- 1 ≤ `code` ≤ `cipher`의 길이
+- `cipher`는 소문자와 공백으로만 구성되어 있습니다.
+- 공백도 하나의 문자로 취급합니다.
+
+---
+
+##### 입출력 예
+
+| cipher | code | result |
+| --- | --- | --- |
+| "dfjardstddetckdaccccdegk" | 4   | "attack" |
+| "pfqallllabwaoclk" | 2   | "fallback" |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- "dfjardstddetckdaccccdegk" 의 4번째, 8번째, 12번째, 16번째, 20번째, 24번째 글자를 합친 "attack"을 return합니다.
+
+입출력 예 #2
+
+- "pfqallllabwaoclk" 의 2번째, 4번째, 6번째, 8번째, 10번째, 12번째, 14번째, 16번째 글자를 합친 "fallback"을 return합니다.
+
+def solution(cipher, code):
+
+    return cipher[code-1::code]
+
+print(solution("dfjardstddetckdaccccdegk",4))
+
+arr[A:B:C]의 의미는, index A 부터 index B 까지 C의 간격으로 배열을 만들어라는 말입니다.
+
+문제:주사위의 개수
+
+###### 문제 설명
+
+머쓱이는 직육면체 모양의 상자를 하나 가지고 있는데 이 상자에 정육면체 모양의 주사위를 최대한 많이 채우고 싶습니다. 상자의 가로, 세로, 높이가 저장되어있는 배열 `box`와 주사위 모서리의 길이 정수 `n`이 매개변수로 주어졌을 때, 상자에 들어갈 수 있는 주사위의 최대 개수를 return 하도록 solution 함수를 완성해주세요.
+
+---
+
+##### 제한사항
+
+- `box`의 길이는 3입니다.
+- `box[0]` = 상자의 가로 길이
+- `box[1]` = 상자의 세로 길이
+- `box[2]` = 상자의 높이 길이
+- 1 ≤ `box`의 원소 ≤ 100
+- 1 ≤ `n` ≤ 50
+- `n` ≤ `box`의 원소
+- 주사위는 상자와 평행하게 넣습니다.
+
+---
+
+##### 입출력 예
+
+| box | n   | result |
+| --- | --- | --- |
+| [1, 1, 1] | 1   | 1   |
+| [10, 8, 6] | 3   | 12  |
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- 상자의 크기가 가로 1, 세로 1, 높이 1이므로 모서리의 길이가 1인 주사위는 1개 들어갈 수 있습니다.
+
+입출력 예 #2
+
+- 상자의 크기가 가로 10, 세로 8, 높이 6이므로 모서리의 길이가 3인 주사위는 12개 들어갈 수 있습니다.
+
+def solution(box, n):
+
+    answer = []
+
+    for i in box:
+
+        answer.append(i//n)
+
+    return answer[0]*answer[1]*answer[2]
+
+print(solution([10, 8, 6],1))
+
+문제:문자열 정렬하기 (1)
+
+###### 문제 설명
+
+문자열 `my_string`이 매개변수로 주어질 때, `my_string` 안에 있는 숫자만 골라 오름차순 정렬한 리스트를 return 하도록 solution 함수를 작성해보세요.
+
+---
+
+##### 제한사항
+
+- 1 ≤ `my_string`의 길이 ≤ 100
+- `my_string`에는 숫자가 한 개 이상 포함되어 있습니다.
+- `my_string`은 영어 소문자 또는 0부터 9까지의 숫자로 이루어져 있습니다. - - -
+
+##### 입출력 예
+
+| my_string | result |
+| --- | --- |
+| "hi12392" | [1, 2, 2, 3, 9] |
+| "p2o4i8gj2" | [2, 2, 4, 8] |
+| "abcde0" | [0] |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- "hi12392"에 있는 숫자 1, 2, 3, 9, 2를 오름차순 정렬한 [1, 2, 2, 3, 9]를 return 합니다.
+
+입출력 예 #2
+
+- "p2o4i8gj2"에 있는 숫자 2, 4, 8, 2를 오름차순 정렬한 [2, 2, 4, 8]을 return 합니다.
+
+입출력 예 #3
+
+- "abcde0"에 있는 숫자 0을 오름차순 정렬한 [0]을 return 합니다.
+
+def solution(my_string):
+ answer = []
+ for i in my_string:
+ if i.isdigit():
+ answer.append(int(i))
+ answer.sort()
+ return answer
+
+int(i)를 사용하여 배열에 넣을때 int형으로 넣는다.(default: "문자")
+
+문제: 가장 큰 수 찾기
+
+###### 문제 설명
+
+정수 배열 `array`가 매개변수로 주어질 때, 가장 큰 수와 그 수의 인덱스를 담은 배열을 return 하도록 solution 함수를 완성해보세요.
+
+---
+
+##### 제한사항
+
+- 1 ≤ `array의` 길이 ≤ 100
+- 0 ≤ `array` 원소 ≤ 1,000
+- `array`에 중복된 숫자는 없습니다.
+
+---
+
+##### 입출력 예
+
+| array | result |
+| --- | --- |
+| [1, 8, 3] | [8, 1] |
+| [9, 10, 11, 8] | [11, 2] |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- 1, 8, 3 중 가장 큰 수는 8이고 인덱스 1에 있습니다.
+
+입출력 예 #2
+
+- 9, 10, 11, 8 중 가장 큰 수는 11이고 인덱스 2에 있습니다.
+
+def solution(array):
+
+    return [max(array), array.index(max(array))]
+
+print(solution([1, 8, 3]))
+
+문제: 배열 회전시키기
+
+###### 문제 설명
+
+정수가 담긴 배열 `numbers`와 문자열 `direction`가 매개변수로 주어집니다. 배열 `numbers`의 원소를 `direction`방향으로 한 칸씩 회전시킨 배열을 return하도록 solution 함수를 완성해주세요.
+
+---
+
+##### 제한사항
+
+- 3 ≤ `numbers`의 길이 ≤ 20
+- `direction`은 "left" 와 "right" 둘 중 하나입니다.
+
+---
+
+##### 입출력 예
+
+| numbers | direction | result |
+| --- | --- | --- |
+| [1, 2, 3] | "right" | [3, 1, 2] |
+| [4, 455, 6, 4, -1, 45, 6] | "left" | [455, 6, 4, -1, 45, 6, 4] |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- `numbers` 가 [1, 2, 3]이고 `direction`이 "right" 이므로 오른쪽으로 한 칸씩 회전시킨 [3, 1, 2]를 return합니다.
+
+입출력 예 #2
+
+- `numbers` 가 [4, 455, 6, 4, -1, 45, 6]이고 `direction`이 "left" 이므로 왼쪽으로 한 칸씩 회전시킨 [455, 6, 4, -1, 45, 6, 4]를 return합니다.
+
+def solution(numbers, direction):
+
+    if direction == "right":
+
+        answer = [numbers[-1]] + numbers[:len(numbers)-1]
+
+    else:
+
+        answer = numbers[1:] + [numbers[0]]
+
+    return answer
+
+print(solution([1, 2, 3],"right"))
+
+ex) num[:5] = 배열 0~5까지
+
+num[1:] = 배열 1부터 끝까지
+
+문제: 최댓값 만들기 (2)
+
+###### 문제 설명
+
+정수 배열 `numbers`가 매개변수로 주어집니다. `numbers`의 원소 중 두 개를 곱해 만들 수 있는 최댓값을 return하도록 solution 함수를 완성해주세요.
+
+---
+
+##### 제한사항
+
+- -10,000 ≤ `numbers`의 원소 ≤ 10,000
+- 2 ≤ `numbers` 의 길이 ≤ 100
+
+---
+
+##### 입출력 예
+
+| numbers | result |
+| --- | --- |
+| [1, 2, -3, 4, -5] | 15  |
+| [0, -31, 24, 10, 1, 9] | 240 |
+| [10, 20, 30, 5, 5, 20, 5] | 600 |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- 두 수의 곱중 최댓값은 -3 * -5 = 15 입니다.
+
+입출력 예 #2
+
+- 두 수의 곱중 최댓값은 10 * 24 = 240 입니다.
+
+입출력 예 #3
+
+- 두 수의 곱중 최댓값은 20 * 30 = 600 입니다.
+
+def solution(numbers):
+
+    numbers.sort()
+
+    return max(numbers[0] * numbers[1], numbers[-1] * numbers[-2])
+
+print(solution([1, 2, -3, 4, -5]))
+
+문제:피자 나눠 먹기 (2)
+
+###### 문제 설명
+
+머쓱이네 피자가게는 피자를 여섯 조각으로 잘라 줍니다. 피자를 나눠먹을 사람의 수 `n`이 매개변수로 주어질 때, `n`명이 주문한 피자를 남기지 않고 모두 같은 수의 피자 조각을 먹어야 한다면 최소 몇 판을 시켜야 하는지를 return 하도록 solution 함수를 완성해보세요.
+
+---
+
+##### 제한사항
+
+1 ≤ `n` ≤ 100
+
+---
+
+##### 입출력 예
+
+| n   | result |
+| --- | --- |
+| 6   | 1   |
+| 10  | 5   |
+| 4   | 2   |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- 6명이 모두 같은 양을 먹기 위해 한 판을 시켜야 피자가 6조각으로 모두 한 조각씩 먹을 수 있습니다.
+
+입출력 예 #2
+
+- 10명이 모두 같은 양을 먹기 위해 최소 5판을 시켜야 피자가 30조각으로 모두 세 조각씩 먹을 수 있습니다.
+
+입출력 예 #3
+
+- 4명이 모두 같은 양을 먹기 위해 최소 2판을 시키면 피자가 12조각으로 모두 세 조각씩 먹을 수 있습니다.
+
+def solution(n):
+
+    answer = 1
+
+    while answer * 6 % n != 0:
+
+        answer += 1
+
+    return answer
+
+print(solution(6))
+
+문제 : 인덱스 바꾸기
+
+###### 문제 설명
+
+문자열 `my_string`과 정수 `num1`, `num2`가 매개변수로 주어질 때, `my_string`에서 인덱스 `num1`과 인덱스 `num2`에 해당하는 문자를 바꾼 문자열을 return 하도록 solution 함수를 완성해보세요.
+
+---
+
+##### 제한사항
+
+- 1 < `my_string`의 길이 < 100
+- 0 ≤ `num1`, `num2` < `my_string`의 길이
+- `my_string`은 소문자로 이루어져 있습니다.
+- `num1` ≠ `num2`
+
+---
+
+##### 입출력 예
+
+| my_string | num1 | num2 | result |
+| --- | --- | --- | --- |
+| "hello" | 1   | 2   | "hlelo" |
+| "I love you" | 3   | 6   | "I l veoyou" |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- "hello"의 1번째 인덱스인 "e"와 2번째 인덱스인 "l"을 바꾸면 "hlelo"입니다.
+
+입출력 예 #2
+
+- "I love you"의 3번째 인덱스 "o"와 " "(공백)을 바꾸면 "I l veoyou"입니다.
+
+def solution(my_string, num1, num2):
+
+    A = list(my_string)
+
+    A[num1], A[num2] = A[num2], A[num1]
+
+    answer = ''.join(A)
+
+    return answer
+
+print(solution("hello",1,2))
