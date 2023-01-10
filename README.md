@@ -2560,3 +2560,235 @@ def solution(s):
     return "".join(tmp)
 
 print(solution("try hello world"))
+
+
+문제 : 로그인 성공?
+
+###### 문제 설명
+
+머쓱이는 프로그래머스에 로그인하려고 합니다. 머쓱이가 입력한 아이디와 패스워드가 담긴 배열 `id_pw`와 회원들의 정보가 담긴 2차원 배열 `db`가 주어질 때, 다음과 같이 로그인 성공, 실패에 따른 메시지를 return하도록 solution 함수를 완성해주세요.
+
+- 아이디와 비밀번호가 모두 일치하는 회원정보가 있으면 "login"을 return합니다.
+- 로그인이 실패했을 때 아이디가 일치하는 회원이 없다면 “fail”를, 아이디는 일치하지만 비밀번호가 일치하는 회원이 없다면 “wrong pw”를 return 합니다.
+
+---
+
+##### 제한사항
+
+- 회원들의 아이디는 문자열입니다.
+- 회원들의 아이디는 알파벳 소문자와 숫자로만 이루어져 있습니다.
+- 회원들의 패스워드는 숫자로 구성된 문자열입니다.
+- 회원들의 비밀번호는 같을 수 있지만 아이디는 같을 수 없습니다.
+- `id_pw`의 길이는 2입니다.
+- `id_pw`와 db의 원소는 [아이디, 패스워드] 형태입니다.
+- 1 ≤ 아이디의 길이 ≤ 15
+- 1 ≤ 비밀번호의 길이 ≤ 6
+- 1 ≤ `db`의 길이 ≤ 10
+- `db`의 원소의 길이는 2입니다.
+
+---
+
+##### 입출력 예
+
+| id_pw | db  | result |
+| --- | --- | --- |
+| ["meosseugi", "1234"] | [["rardss", "123"], ["yyoom", "1234"], ["meosseugi", "1234"]] | "login" |
+| ["programmer01", "15789"] | [["programmer02", "111111"], ["programmer00", "134"], ["programmer01", "1145"]] | "wrong pw" |
+| ["rabbit04", "98761"] | [["jaja11", "98761"], ["krong0313", "29440"], ["rabbit00", "111333"]] | "fail" |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- `db`에 같은 정보의 계정이 있으므로 "login"을 return합니다.
+
+입출력 예 #2
+
+- `db`에 아이디는 같지만 패스워드가 다른 계정이 있으므로 "wrong pw"를 return합니다.
+
+입출력 예 #3
+
+- `db`에 아이디가 맞는 계정이 없으므로 "fail"을 return합니다.
+
+def solution(id_pw, db):
+
+    answer = 'fail'
+
+    for id, pw in db:
+
+        if id_pw[0] == id:
+
+            if id_pw[1] == pw:
+
+                answer = 'login'
+
+            else:
+
+                answer = 'wrong pw'
+
+    return answer
+
+print(solution(["meosseugi", "1234"],   [["rardss", "123"], ["yyoom", "1234"], ["meosseugi", "1234"]]))
+
+이차원배열 for문 사용법
+
+문제 : 직사각형 넓이 구하기
+
+###### 문제 설명
+
+2차원 좌표 평면에 변이 축과 평행한 직사각형이 있습니다. 직사각형 네 꼭짓점의 좌표 [[x1, y1], [x2, y2], [x3, y3], [x4, y4]]가 담겨있는 배열 `dots`가 매개변수로 주어질 때, 직사각형의 넓이를 return 하도록 solution 함수를 완성해보세요.
+
+---
+
+##### 제한사항
+
+- `dots`의 길이 = 4
+- `dots`의 원소의 길이 = 2
+- -256 < `dots[i]`의 원소 < 256
+- 잘못된 입력은 주어지지 않습니다.
+
+---
+
+##### 입출력 예
+
+| dots | result |
+| --- | --- |
+| [[1, 1], [2, 1], [2, 2], [1, 2]] | 1   |
+| [[-1, -1], [1, 1], [1, -1], [-1, 1]] | 4   |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- 좌표 [[1, 1], [2, 1], [2, 2], [1, 2]] 를 꼭짓점으로 갖는 직사각형의 가로, 세로 길이는 각각 1, 1이므로 직사각형의 넓이는 1 x 1 = 1입니다.
+
+입출력 예 #2
+
+- 좌표 [[-1, -1], [1, 1], [1, -1], [-1, 1]]를 꼭짓점으로 갖는 직사각형의 가로, 세로 길이는 각각 2, 2이므로 직사각형의 넓이는 2 x 2 = 4입니다.
+
+def solution(dots):
+
+    x_dot = [dot[0] for dot in dots]
+
+    y_dot = [dot[1] for dot in dots]
+
+    answer = (max(x_dot) - min(x_dot)) * (max(y_dot) - min(y_dot))
+
+    return answer
+
+print(solution([[-1, -1], [1, 1], [1, -1], [-1, 1]]))
+
+문제 : 시저 암호
+
+###### 문제 설명
+
+어떤 문장의 각 알파벳을 일정한 거리만큼 밀어서 다른 알파벳으로 바꾸는 암호화 방식을 시저 암호라고 합니다. 예를 들어 "AB"는 1만큼 밀면 "BC"가 되고, 3만큼 밀면 "DE"가 됩니다. "z"는 1만큼 밀면 "a"가 됩니다. 문자열 s와 거리 n을 입력받아 s를 n만큼 민 암호문을 만드는 함수, solution을 완성해 보세요.
+
+##### 제한 조건
+
+- 공백은 아무리 밀어도 공백입니다.
+- s는 알파벳 소문자, 대문자, 공백으로만 이루어져 있습니다.
+- s의 길이는 8000이하입니다.
+- n은 1 이상, 25이하인 자연수입니다.
+
+##### 입출력 예
+
+| s   | n   | result |
+| --- | --- | --- |
+| "AB" | 1   | "BC" |
+| "z" | 1   | "a" |
+| "a B z" | 4   | "e F d" |
+
+def solution(s, n):
+
+    lower_list = "abcdefghijklmnopqrstuvwxyz"
+
+    upper_list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    result = []
+
+    for i in s:
+
+        if i is " ":
+
+            result.append(" ")
+
+        elif i.islower() is True:
+
+            new_ = lower_list.find(i) + n
+
+            result.append(lower_list[new_ % 26])
+
+        else:
+
+            new_ = upper_list.find(i) + n
+
+            result.append(upper_list[new_ % 26])
+
+    return "".join(result)
+
+print(solution("az",1))
+
+문제 : 문자열 밀기
+
+###### 문제 설명
+
+문자열 "hello"에서 각 문자를 오른쪽으로 한 칸씩 밀고 마지막 문자는 맨 앞으로 이동시키면 "ohell"이 됩니다. 이것을 문자열을 민다고 정의한다면 문자열 `A`와 `B`가 매개변수로 주어질 때, `A`를 밀어서 `B`가 될 수 있다면 밀어야 하는 최소 횟수를 return하고 밀어서 `B`가 될 수 없으면 -1을 return 하도록 solution 함수를 완성해보세요.
+
+---
+
+##### 제한사항
+
+- 0 < `A`의 길이 = `B`의 길이 < 100
+- `A`, `B`는 알파벳 소문자로 이루어져 있습니다.
+
+---
+
+##### 입출력 예
+
+| A   | B   | result |
+| --- | --- | --- |
+| "hello" | "ohell" | 1   |
+| "apple" | "elppa" | -1  |
+| "atat" | "tata" | 1   |
+| "abc" | "abc" | 0   |
+
+---
+
+##### 입출력 예 설명
+
+입출력 예 #1
+
+- "hello"를 오른쪽으로 한 칸 밀면 "ohell"가 됩니다.
+
+입출력 예 #2
+
+- "apple"은 몇 번을 밀어도 "elppa"가 될 수 없습니다.
+
+입출력 예 #3
+
+- "atat"는 오른쪽으로 한 칸, 세 칸을 밀면 "tata"가 되므로 최소 횟수인 1을 반환합니다.
+
+입출력 예 #4
+
+- "abc"는 밀지 않아도 "abc"이므로 0을 반환합니다.
+
+def solution(A, B):
+
+    AA = A+A
+
+    answer = AA.find(B)
+
+    if answer >0:
+
+        answer = len(A) - answer
+
+    return answer
+
+print(solution("hello","ohell"))
+
+find함수 : 해당 문자열에서 매개변수의 시작위치를 찾아준다
